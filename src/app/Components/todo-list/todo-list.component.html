@@ -1,5 +1,20 @@
 <div>
-    @for (item of list; track $index) {
-        <div>{{item.task}}</div>
-    }
+    <form action="" name="addForm" >
+        <div class="upper-body">
+            <input type="text" name="text" class="input" id="searchbar" [(ngModel)]="newTask">
+            <button type="submit" (click)="handleNewTask()">Send</button>
+        </div>
+    </form>
+
+    <div class="" *ngIf="list.length<=0; else executeElse">
+        <p>length of the array is zero</p>
+    </div>
+    
+    <ng-template #executeElse>
+        @for (item of list; track $index) {
+            <input type="checkbox" id="task{{$index}}" [checked]="item.isCompleted" (click)="handleChecked(item)" 
+             name="task-list1" value="task">
+            <label for="task{{$index}}">{{item.task}}</label><br>
+        }
+    </ng-template>
 </div>
