@@ -1,0 +1,31 @@
+<div class="todo">
+
+    <div class="form">
+        <input type="text" [(ngModel)]="newDesc"  name="search_bar" id="">
+        <input type="submit" (click)="$event.preventDefault(); handleSubmit();" value="Submit">
+    </div>
+
+    <div class="options">
+        <select name="selectMode" [(ngModel)]="selectValue" id="">
+            <option value="0">All</option>
+            <option value="1">Done</option>
+            <option value="2">Pending</option>
+        </select>
+    </div>
+
+    <div class="checkempty" *ngIf="todoList.length===0;then handlEmpty; else handleNot"></div>
+
+    <ng-template #handlEmpty>
+        <div>
+            Nothing to display
+        </div>
+    </ng-template>
+
+    <ng-template #handleNot>
+        <ul>
+            <li *ngFor="let item of valueToShow; index as index">
+               {{item.description}}<input type="checkbox" (click)="handleCheck(item)" [checked]="item.isDone" name="" id=""> 
+            </li>
+        </ul>
+    </ng-template>
+</div>
